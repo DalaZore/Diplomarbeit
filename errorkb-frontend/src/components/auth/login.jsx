@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import Counters from '../counters';
+import UploadPage from '../UploadPage';
 
 
 let apiBaseUrl = "http://localhost:4000/api/";
@@ -37,7 +38,7 @@ class Login extends Component {
             password:'',
             menuValue:1,
             loginComponent:localloginComponent,
-            loginRole:'student'
+            loginRole:'user'
         }
     }
     componentWillMount(){
@@ -62,7 +63,7 @@ class Login extends Component {
                 </div>
             </MuiThemeProvider>
         )
-        this.setState({menuValue:1,loginComponent:localloginComponent,loginRole:'student'})
+        this.setState({menuValue:1,loginComponent:localloginComponent,loginRole:'user'})
             }
 
     handleClick(event){
@@ -71,27 +72,33 @@ class Login extends Component {
             "userid":this.state.username,
             "password":this.state.password,
         }
-        axios.post(apiBaseUrl+'login', payload)
-            .then(function (response) {
-                console.log(response);
-                if(response.data.code == 200){
-                    console.log("Login successfull");
-                    let uploadScreen=[];
-                    uploadScreen.push(<Counters appContext={self.props.appContext} role={self.state.loginRole}/>)
-                    self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
-                }
-                else if(response.data.code == 204){
-                    console.log("Username password do not match");
-                    alert(response.data.success)
-                }
-                else{
-                    console.log("Username does not exists");
-                    alert("Username does not exist");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        if(payload.userid=="test" && payload.password=="test"){
+            let uploadScreen=[];
+            uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole}/>)
+            self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
+
+        }
+        // axios.post(apiBaseUrl+'login', payload)
+        //     .then(function (response) {
+        //         console.log(response);
+        //         if(response.data.code == 200){
+        //             console.log("Login successfull");
+        //             let uploadScreen=[];
+        //             uploadScreen.push(<Counters appContext={self.props.appContext} role={self.state.loginRole}/>)
+        //             self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
+        //         }
+        //         else if(response.data.code == 204){
+        //             console.log("Username password do not match");
+        //             alert(response.data.success)
+        //         }
+        //         else{
+        //             console.log("Username does not exists");
+        //             alert("Username does not exist");
+        //         }
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
     }
 
     render() {

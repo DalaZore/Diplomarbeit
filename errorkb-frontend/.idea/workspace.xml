@@ -37,7 +37,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="ts.external.directory.path" value="C:\Users\admin\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\193.5233.80\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
@@ -99,6 +99,7 @@
       <workItem from="1576482604431" duration="2340000" />
       <workItem from="1576484957574" duration="10956000" />
       <workItem from="1576658860357" duration="3419000" />
+      <workItem from="1579191638016" duration="2001000" />
     </task>
     <servers />
   </component>
@@ -126,9 +127,9 @@
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
     <state width="3419" height="404" key="GridCell.Tab.0.right/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1576483833069" />
-    <state x="1221" y="346" key="SettingsEditor" timestamp="1576485358000">
+    <state x="1221" y="346" key="SettingsEditor" timestamp="1579193493530">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
-    <state x="1221" y="346" key="SettingsEditor/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1576485358000" />
+    <state x="1221" y="346" key="SettingsEditor/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1579193493530" />
   </component>
 </project>

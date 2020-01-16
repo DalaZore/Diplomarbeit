@@ -14,12 +14,11 @@ class App extends Component {
 
   componentWillMount(){
     let loginPage =[];
-    loginPage.push(<Loginscreen parentContext={this}/>);
+    loginPage.push(<Loginscreen appContext={this} key={"login-screen"}/>);
     this.setState({
       loginPage:loginPage
     })
   }
-
 
   render() {
     return (
