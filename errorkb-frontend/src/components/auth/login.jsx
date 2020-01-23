@@ -5,7 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import axios from 'axios';
 import Counters from '../counters';
-import UploadPage from '../UploadPage';
+import UploadScreen from '../UploadScreen';
 
 
 let apiBaseUrl = "http://localhost:4000/api/";
@@ -74,7 +74,7 @@ class Login extends Component {
         }
         if(payload.userid=="test" && payload.password=="test"){
             let uploadScreen=[];
-            uploadScreen.push(<UploadPage appContext={self.props.appContext} role={self.state.loginRole}/>)
+            uploadScreen.push(<UploadScreen appContext={self.props.appContext} role={self.state.loginRole}/>)
             self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
 
         }
