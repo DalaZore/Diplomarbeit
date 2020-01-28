@@ -3,7 +3,8 @@ import '../App.css';
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router";
 import LoginScreen from './auth/loginscreen';
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import AppBar from "material-ui/AppBar";
+// import AppBar from "material-ui/AppBar";
+import AppBar from "./AppBar";
 
 
 
@@ -45,9 +46,7 @@ class UploadScreen extends Component {
         return(
             <div>
                 <MuiThemeProvider>
-                    <AppBar
-                        title="Home"
-                    />
+                    <AppBar                    />
                 </MuiThemeProvider>
             </div>
         );
