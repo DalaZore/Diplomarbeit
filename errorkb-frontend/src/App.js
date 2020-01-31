@@ -1,33 +1,74 @@
 import React,{Component} from 'react';
 import './App.css';
-import Loginscreen from './components/auth/loginscreen'
+import Login from './components/auth/login.jsx';
+import Home from "./components/Home";
+import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
+import AuthApi from "./components/auth/AuthApi";
+import { useCookies } from 'react-cookie';
 
-class App extends Component {
 
-  constructor(props){
-    super(props);
-    this.state={
-      loginPage:[],
-      uploadScreen:[]
-    }
-  };
+export default function App(){
+    const [auth,setAuth] = React.useState(false);
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
 
-  componentWillMount(){
-    let loginPage =[];
-    loginPage.push(<Loginscreen appContext={this} key={"login-screen"}/>);
-    this.setState({
-      loginPage:loginPage
-    })
-  }
+    const readCookie = () => {
+    const user = cookies.user
+        console.log(user);
+        if (user) {
+            setAuth(true);
+        }
+    };
 
-  render() {
+    React.useEffect(()=>{
+        readCookie();
+    },[]);
+
     return (
-        <div className="App">
-          {this.state.loginPage}
-          {this.state.uploadScreen}
-        </div>
+
+        <AuthApi.Provider value={{auth,setAuth}}>
+                <Router>
+                  <Routes/>
+                </Router>
+        </AuthApi.Provider>
     )
-  }
 }
 
-export default App;
+
+
+const Routes = () => {
+    const Auth = React.useContext(AuthApi);
+  return(
+      <Switch>
+        <ProtectedLogin path={"/login"} auth={Auth.auth} component={Login}/>
+        <ProtectedRoute path={"/home"} auth={Auth.auth} component={Home}/>
+      </Switch>
+  )
+};
+
+const ProtectedRoute = ({auth,component:Component,...rest}) => {
+    return(
+        <Route
+            {...rest}
+            render = {()=>auth?(
+                <Component/>
+            ):
+                (
+                    <Redirect to={'/login'}/>
+                )
+            }/>
+    )
+};
+const ProtectedLogin = ({auth,component:Component,...rest}) => {
+    return(
+        <Route
+            {...rest}
+            render = {()=>!auth?(
+                    <Component/>
+                ):
+                (
+                    <Redirect to={'/home'}/>
+                )
+            }/>
+    )
+};
+

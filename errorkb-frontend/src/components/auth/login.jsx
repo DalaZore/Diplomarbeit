@@ -1,122 +1,90 @@
-import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from "../AppBar";
-import RaisedButton from 'material-ui/RaisedButton';
-import TextField from 'material-ui/TextField';
-import axios from 'axios';
-import Counters from '../counters';
-import UploadScreen from '../UploadScreen';
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import AuthApi from "./AuthApi";
+import { useCookies } from 'react-cookie';
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: 250,
+        },
+    },
+}));
 
 
-let apiBaseUrl = "http://localhost:4000/api/";
-class Login extends Component {
-    constructor(props){
-        super(props);
-        let localloginComponent=[];
-        localloginComponent.push(
-            <MuiThemeProvider key={"theme"}>
-                <div>
-                    <TextField
-                        hintText="Enter your Username"
-                        floatingLabelText="Login"
-                        onChange={(event,newValue) => this.setState({username:newValue})}
-                    />
-                    <br/>
-                    <TextField
-                        type="password"
-                        hintText="Enter your Password"
-                        floatingLabelText="Password"
-                        onChange = {(event,newValue) => this.setState({password:newValue})}
-                    />
-                    <br/>
-                    <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-                </div>
-            </MuiThemeProvider>
-        )
-        this.state={
-            username:'',
-            password:'',
-            menuValue:1,
-            loginComponent:localloginComponent,
-            loginRole:'user'
-        }
-    }
-    componentWillMount(){
-        let localloginComponent=[];
-        localloginComponent.push(
-            <MuiThemeProvider>
-                <div>
-                    <TextField
-                        hintText="Enter your Username"
-                        floatingLabelText="Login"
-                        onChange = {(event,newValue) => this.setState({username:newValue})}
-                    />
-                    <br/>
-                    <TextField
-                        type="password"
-                        hintText="Enter your Password"
-                        floatingLabelText="Password"
-                        onChange = {(event,newValue) => this.setState({password:newValue})}
-                    />
-                    <br/>
-                    <RaisedButton label="Submit" primary={true} style={style} onClick={(event) => this.handleClick(event)}/>
-                </div>
-            </MuiThemeProvider>
-        )
-        this.setState({menuValue:1,loginComponent:localloginComponent,loginRole:'user'})
-            }
 
-    handleClick(event){
-        let self = this;
-        let payload={
-            "userid":this.state.username,
-            "password":this.state.password,
-        }
-        if(payload.userid=="test" && payload.password=="test"){
-            let uploadScreen=[];
-            uploadScreen.push(<UploadScreen appContext={self.props.appContext} role={self.state.loginRole}/>)
-            self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
-
-        }
-        // axios.post(apiBaseUrl+'login', payload)
-        //     .then(function (response) {
-        //         console.log(response);
-        //         if(response.data.code == 200){
-        //             console.log("Login successfull");
-        //             let uploadScreen=[];
-        //             uploadScreen.push(<Counters appContext={self.props.appContext} role={self.state.loginRole}/>)
-        //             self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
-        //         }
-        //         else if(response.data.code == 204){
-        //             console.log("Username password do not match");
-        //             alert(response.data.success)
-        //         }
-        //         else{
-        //             console.log("Username does not exists");
-        //             alert("Username does not exist");
-        //         }
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+export default function Login() {
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const Auth = React.useContext(AuthApi)
+    const handleOnClick=()=>{
+        Auth.setAuth(true);
+        setCookie("user","LoginTrue")
     }
 
-    render() {
-        return (
-            <div>
-                <MuiThemeProvider>
-                    <AppBar
-                        title="Login"
-                    />
-                </MuiThemeProvider>
-                {this.state.loginComponent}
+    const classes = useStyles();
+    return (
+        <form className={classes.root} noValidate autoComplete="off">
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <Grid container spacing={4}>
+                    <Grid item xs={5} sm={5}/>
+                    <Grid item xs={5} sm={5}>
+                        <TextField
+                            id="standard-password-input"
+                            label="Username"
+                            type="text"
+                            autoComplete="current-username"
+                        />
+                    </Grid>
+
+                </Grid>
             </div>
-        );
-    }
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <Grid container spacing={4}>
+                    <Grid item xs={5} sm={5}/>
+                    <Grid item xs={5} sm={5}>
+                    <TextField
+                        id="standard-password-input"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                    />
+                    <Grid item xs={5}/>
+                 </Grid>
+                </Grid>
+
+            </div>
+
+            <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                paddingTop:'10px',
+                paddingLeft:'10px',
+            }}>
+                <Grid container spacing={4}>
+                    <Grid item xs={5} sm={5}/>
+
+                    <Grid item xs={6} sm={6}>
+                    <Button onClick={handleOnClick} className={classes.root} style={{width:'255px'}} variant="outlined" color="Primary">
+                        Login
+                    </Button>
+                    <Grid item xs={5}/>
+                </Grid>
+                </Grid>
+
+            </div>
+        </form>
+    );
 }
-
-const style = {
-    margin: 15,
-};
-
-export default Login;

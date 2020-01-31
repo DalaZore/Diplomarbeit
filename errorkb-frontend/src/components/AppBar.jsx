@@ -19,6 +19,10 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from "@material-ui/core/InputBase";
+import {ListItemSecondaryAction} from "@material-ui/core";
+import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
+import { useCookies,Cookies } from 'react-cookie';
+
 
 const drawerWidth = 240;
 
@@ -31,6 +35,10 @@ const useStyles = makeStyles(theme => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
+    },
+
+    a:{
+      textDecoration:'none',
     },
     appBarShift: {
         width: `calc(100% - ${drawerWidth}px)`,
@@ -117,6 +125,8 @@ export default function PersistentDrawerLeft() {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -125,6 +135,12 @@ export default function PersistentDrawerLeft() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const handleOnClick = () => {
+        removeCookie("user");
+
+        window.location = '/login/';
+    }
 
     return (
         <div className={classes.root}>
@@ -194,6 +210,13 @@ export default function PersistentDrawerLeft() {
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
+                </List>
+                <Divider />
+                <List>
+                        <ListItem button key={"Logout"} onClick={handleOnClick}>
+                            <ListItemIcon>{<MailIcon />}</ListItemIcon>
+                            <ListItemText primary={'Logout'} />
+                        </ListItem>
                 </List>
             </Drawer>
             <main

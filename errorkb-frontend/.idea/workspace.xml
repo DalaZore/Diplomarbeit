@@ -101,6 +101,7 @@
       <workItem from="1576658860357" duration="3419000" />
       <workItem from="1579191638016" duration="2001000" />
       <workItem from="1580213750271" duration="2148000" />
+      <workItem from="1580472658351" duration="9673000" />
     </task>
     <servers />
   </component>
@@ -108,10 +109,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1450" y="451" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576662426330">
+    <state x="1450" y="451" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580475418374">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
-    <state x="1450" y="451" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1576662426330" />
+    <state x="1450" y="451" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1580475418374" />
     <state width="3419" height="404" key="GridCell.Tab.0.bottom" timestamp="1576483833069">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
@@ -132,5 +133,9 @@
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
     <state x="1221" y="346" key="SettingsEditor/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1579193493530" />
+    <state x="1383" y="317" key="search.everywhere.popup" timestamp="1580473289016">
+      <screen x="0" y="0" width="3440" height="1410" />
+    </state>
+    <state x="1383" y="317" key="search.everywhere.popup/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1580473289016" />
   </component>
 </project>
