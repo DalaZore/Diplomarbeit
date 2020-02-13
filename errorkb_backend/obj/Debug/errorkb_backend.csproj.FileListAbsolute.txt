@@ -102,3 +102,6 @@ D:\Github\Diplomarbeit\errorkb_backend\bin\MySql.Data.Entity.EF6.dll
 D:\Github\Diplomarbeit\errorkb_backend\bin\MySql.Data.Entity.EF6.xml
 D:\Github\Diplomarbeit\errorkb_backend\bin\MySql.Data.EntityFramework.dll
 D:\Github\Diplomarbeit\errorkb_backend\bin\MySql.Data.EntityFramework.xml
+D:\Github\Diplomarbeit\errorkb_backend\bin\System.Web.Cors.dll
+D:\Github\Diplomarbeit\errorkb_backend\bin\System.Web.Http.Cors.dll
+D:\Github\Diplomarbeit\errorkb_backend\bin\System.Web.Http.Cors.xml

@@ -8,8 +8,10 @@ using ErrorkbDataAccess;
 
 namespace Errorkb_backend.Controllers
 {
+
     public class UserController : ApiController
     {
+
         public IEnumerable<user> Get()
         {
             using (errorkbEntities1 entities = new errorkbEntities1())

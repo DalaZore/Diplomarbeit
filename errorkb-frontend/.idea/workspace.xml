@@ -27,6 +27,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/auth" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -41,6 +42,9 @@
     <property name="ts.external.directory.path" value="C:\Users\admin\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\193.5233.80\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\Diplomarbeit\errorkb-frontend\src\components\auth" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Github\Diplomarbeit\errorkb-frontend\src" />
       <recent name="D:\Github\Diplomarbeit\errorkb-frontend\_DELETED" />
@@ -103,6 +107,7 @@
       <workItem from="1580213750271" duration="2148000" />
       <workItem from="1580472658351" duration="9673000" />
       <workItem from="1581351218996" duration="637000" />
+      <workItem from="1581609638588" duration="5846000" />
     </task>
     <servers />
   </component>
