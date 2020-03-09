@@ -21,3 +21,4 @@ D:\Github\Diplomarbeit\errorkb_backend\ErrorkbDataAccess\obj\Debug\ErrorkbDataAc
 D:\Github\Diplomarbeit\errorkb_backend\ErrorkbDataAccess\obj\Debug\ErrorkbDataAccess.pdb
 D:\Github\Diplomarbeit\errorkb_backend\ErrorkbDataAccess\bin\Debug\MySql.Data.EntityFramework.dll
 D:\Github\Diplomarbeit\errorkb_backend\ErrorkbDataAccess\bin\Debug\MySql.Data.EntityFramework.xml
+D:\Github\Diplomarbeit\errorkb_backend\ErrorkbDataAccess\obj\Debug\ErrorkbDataAccess.csprojAssemblyReference.cache
