@@ -28,5 +28,28 @@ namespace Errorkb_backend.Controllers
             }
         }
 
+        public user PostNewUser(string username, string password,string priv)
+        {
+            using (errorkbEntities1 entities = new errorkbEntities1())
+            {
+                if(priv != "user || priv != admin")
+                {
+                    return null;
+                }
+                else
+                {
+                    entities.users.Add(new user()
+                    {
+                        username = username,
+                        passwd = password,
+                        privileges = priv
+                    });
+                    entities.SaveChanges();
+
+                    return entities.users.FirstOrDefault(e => e.username == username;
+                }
+            }            
+        }
+
     }
 }
