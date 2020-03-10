@@ -81,6 +81,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="entry.cs">
+      <DependentUpon>ErrorkbEntrieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorkbEntrieModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorkbEntrieModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorkbEntrieModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorkbEntrieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorkbEntrieModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorkbEntrieModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="ErrorkbUserModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +125,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ErrorkbUserModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="ErrorkbEntrieModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ErrorkbEntrieModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ErrorkbEntrieModel.edmx.diagram">
+      <DependentUpon>ErrorkbEntrieModel.edmx</DependentUpon>
+    </None>
     <None Include="ErrorkbUserModel.edmx.diagram">
       <DependentUpon>ErrorkbUserModel.edmx</DependentUpon>
     </None>
@@ -116,6 +141,16 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ErrorkbEntrieModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ErrorkbEntrieModel.edmx</DependentUpon>
+      <LastGenOutput>ErrorkbEntrieModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ErrorkbEntrieModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ErrorkbEntrieModel.edmx</DependentUpon>
+      <LastGenOutput>ErrorkbEntrieModel.cs</LastGenOutput>
+    </Content>
     <Content Include="ErrorkbUserModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ErrorkbUserModel.edmx</DependentUpon>
