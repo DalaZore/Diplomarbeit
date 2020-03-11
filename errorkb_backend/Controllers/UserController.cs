@@ -56,32 +56,7 @@ namespace Errorkb_backend.Controllers
             }            
         }
 
-        [System.Web.Http.Route("Api/PostNewEntry")]
-        [System.Web.Http.HttpPost]
-        public IHttpActionResult PostNewEntry(string tit, string desc, string stat, string username)
-        {
-            using (errorkbEntryEntities entities = new errorkbEntryEntities())
-            {
-                if (stat == "open" || stat == "closed")
-                {
-                    entities.entries.Add(new entry()
-                    {
-                        title = tit,
-                        description = desc,
-                        status = stat,
-                        user = username
-                    });
-                    entities.SaveChanges();
 
-                    return Ok();
-                }
-                else
-                {
-                    return Content(HttpStatusCode.BadRequest, "Any object");
-
-                }
-            }
-        }
 
     }
 }
