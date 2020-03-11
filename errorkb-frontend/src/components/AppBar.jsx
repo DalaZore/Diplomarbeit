@@ -18,10 +18,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import SearchIcon from '@material-ui/icons/Search';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import HomeIcon from '@material-ui/icons/Home';
 import InputBase from "@material-ui/core/InputBase";
 import {ListItemSecondaryAction} from "@material-ui/core";
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 import { useCookies,Cookies } from 'react-cookie';
+import SvgIcon from "@material-ui/core/SvgIcon";
 
 
 const drawerWidth = 240;
@@ -126,21 +129,43 @@ export default function PersistentDrawerLeft() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
-
+    const [isAdm,setAdm] = React.useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
+        readCookie();
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
     };
 
-    const handleOnClick = () => {
-        removeCookie("user");
+    const handleOnClickHome = () => {
+        window.location = '/home/';
+    }
 
+    const handleOnClickLogout = () => {
+        removeCookie("user");
+        removeCookie("rights");
         window.location = '/login/';
     }
+    const handleOnClickUserMgmt = () => {
+        window.location = '/UserMgmt/';
+    }
+
+
+    const readCookie = () => {
+        const rights = cookies.rights
+        if (rights == "admin") {
+            setAdm(true);
+        }
+        else{
+            setAdm(false);
+        }
+    }
+
+
+
 
     return (
         <div className={classes.root}>
@@ -194,16 +219,20 @@ export default function PersistentDrawerLeft() {
                     </IconButton>
                 </div>
                 <Divider />
-                <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
-                </List>
+                <ListItem button key={"Home"} onClick={handleOnClickHome} >
+                    <ListItemIcon>{<HomeIcon />}</ListItemIcon>
+                    <ListItemText primary={'Home'} />
+                </ListItem>
                 <Divider />
                 <List>
+                    {
+                        isAdm
+                            ? <ListItem button key={"User management"} onClick={handleOnClickUserMgmt} >
+                                <ListItemIcon>{<AccountBoxIcon />}</ListItemIcon>
+                                <ListItemText primary={'User management'} />
+                            </ListItem>
+                            :   <br/>
+                    }
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -213,7 +242,7 @@ export default function PersistentDrawerLeft() {
                 </List>
                 <Divider />
                 <List>
-                        <ListItem button key={"Logout"} onClick={handleOnClick}>
+                        <ListItem button key={"Logout"} onClick={handleOnClickLogout}>
                             <ListItemIcon>{<MailIcon />}</ListItemIcon>
                             <ListItemText primary={'Logout'} />
                         </ListItem>

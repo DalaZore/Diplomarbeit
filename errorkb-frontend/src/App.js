@@ -19,7 +19,7 @@ export default function App(){
         }
     };
 
-    React.useEffect(()=>{
+    React.useEffect(()=>    {
         readCookie();
     },[]);
 

@@ -20,9 +20,6 @@ var request = require('superagent');
 
 class Home extends Component {
 
-
-
-
     render() {
         return(
             <div>

@@ -15,8 +15,6 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-
-
 export default function Login() {
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
     const [username, setUsername] = useState('');
@@ -29,7 +27,8 @@ export default function Login() {
         const data = await response.json();
         if (data[0].username == username && data[0].passwd == password){
             Auth.setAuth(true);
-            setCookie(username,"LoginTrue")
+            setCookie("user",data[0].username);
+            setCookie("rights",data[0].privileges);
         }
         else{
             alert("Wrong credentials")
