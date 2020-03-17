@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component,useState,useEffect} from 'react';
 import clsx from 'clsx';
 import {fade, makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -25,6 +25,7 @@ import {ListItemSecondaryAction} from "@material-ui/core";
 import {BrowserRouter as Router, Switch, Route, Link, Redirect} from "react-router-dom";
 import { useCookies,Cookies } from 'react-cookie';
 import SvgIcon from "@material-ui/core/SvgIcon";
+import App from "../App";
 
 
 const drawerWidth = 240;
@@ -130,31 +131,31 @@ export default function PersistentDrawerLeft() {
     const [open, setOpen] = React.useState(false);
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
     const [isAdm,setAdm] = React.useState(false);
+    const [isLoggedIn,setLoggedIn] = React.useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
-        readCookie();
     };
 
     const handleDrawerClose = () => {
         setOpen(false);
     };
 
-    const handleOnClickHome = () => {
-        window.location = '/home/';
+    const handleOnClickDashboard = () => {
+        window.location = '/Dashboard/';
     }
 
     const handleOnClickLogout = () => {
         removeCookie("user");
         removeCookie("rights");
-        window.location = '/login/';
+        window.location = '/';
     }
     const handleOnClickUserMgmt = () => {
-        window.location = '/UserMgmt/';
+        window.location = '/UserMgmt';
     }
 
 
-    const readCookie = () => {
+    const readCookieRights = () => {
         const rights = cookies.rights
         if (rights == "admin") {
             setAdm(true);
@@ -163,11 +164,21 @@ export default function PersistentDrawerLeft() {
             setAdm(false);
         }
     }
-
-
-
-
+    const readCookieUser = () => {
+        const user = cookies.user
+        if (user != null) {
+            setLoggedIn(true);
+        }
+        else{
+            setLoggedIn(false);
+        }
+    }
+    useEffect(()=>{
+        readCookieUser();
+        readCookieRights();
+    })
     return (
+
         <div className={classes.root}>
             <CssBaseline />
             <AppBar
@@ -176,7 +187,10 @@ export default function PersistentDrawerLeft() {
                     [classes.appBarShift]: open,
                 })}
             >
-                <Toolbar>
+                <Toolbar>{
+                    isLoggedIn
+
+                        ?
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -185,23 +199,28 @@ export default function PersistentDrawerLeft() {
                         className={clsx(classes.menuButton, open && classes.hide)}
                     >
                         <MenuIcon />
-                    </IconButton>
+                    </IconButton>:<p/>}
                     <Typography variant="h6" noWrap>
                         Error-KB
                     </Typography>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </div>
+                    {
+                        isLoggedIn
+                        ?   <div className={classes.search}>
+                                <div className={classes.searchIcon}>
+                                    <SearchIcon />
+                                </div>
+                                <InputBase
+                                    placeholder="Search…"
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' }}
+                                />
+                            </div>
+                        :<div></div>
+                    }
+
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -219,27 +238,26 @@ export default function PersistentDrawerLeft() {
                     </IconButton>
                 </div>
                 <Divider />
-                <ListItem button key={"Home"} onClick={handleOnClickHome} >
+                <ListItem button key={"Dashboard"} onClick={handleOnClickDashboard} >
                     <ListItemIcon>{<HomeIcon />}</ListItemIcon>
-                    <ListItemText primary={'Home'} />
+                    <ListItemText primary={'Dashboard'} />
                 </ListItem>
                 <Divider />
-                <List>
-                    {
-                        isAdm
-                            ? <ListItem button key={"User management"} onClick={handleOnClickUserMgmt} >
+                {isAdm?
+                     <ListItem button key={"User management"} onClick={handleOnClickUserMgmt} >
                                 <ListItemIcon>{<AccountBoxIcon />}</ListItemIcon>
                                 <ListItemText primary={'User management'} />
-                            </ListItem>
-                            :   <br/>
-                    }
+                     </ListItem>:null}
+                <Divider />
+
                     {['All mail', 'Trash', 'Spam'].map((text, index) => (
                         <ListItem button key={text}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
+
                     ))}
-                </List>
+
                 <Divider />
                 <List>
                         <ListItem button key={"Logout"} onClick={handleOnClickLogout}>
@@ -255,6 +273,7 @@ export default function PersistentDrawerLeft() {
             >
                 <div className={classes.drawerHeader} />
             </main>
+
         </div>
     );
 }
