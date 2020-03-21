@@ -42,13 +42,13 @@
     <property name="ts.external.directory.path" value="C:\Users\admin\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\193.5233.80\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Github\Diplomarbeit\errorkb-frontend\src\components\auth" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Github\Diplomarbeit\errorkb-frontend\src" />
       <recent name="D:\Github\Diplomarbeit\errorkb-frontend\_DELETED" />
       <recent name="D:\Github\Diplomarbeit\errorkb-frontend" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\Diplomarbeit\errorkb-frontend\src\components\auth" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">

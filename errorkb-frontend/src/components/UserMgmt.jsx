@@ -4,6 +4,10 @@ import Dashboard from "./Dashboard";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 // import AppBar from "material-ui/AppBar";
 import AppBar from "./AppBar";
+import {useCookies} from "react-cookie";
+// import MaterialTableDemo from "./usermanagement/usertable";
+import EnhancedTable from "./usermanagement/usertable";
+
 
 
 //var apiBaseUrl = "http://localhost:4000/api/";
@@ -18,11 +22,34 @@ superagent is used to handle post/get requests to server
 var request = require('superagent');
 
 export default function UserMgmt() {
-    return (
-        <div>
 
-            <p>test</p>
-        </div>
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const [isAdm,setAdm] = React.useState(false);
+    const [isLoggedIn,setLoggedIn] = React.useState(false);
+
+
+    const readCookieUser = () => {
+        const user = cookies.user
+        if (user != null) {
+            setLoggedIn(true);
+        }
+        else{
+            setLoggedIn(false);
+            window.location="/";
+        }
+    }
+    useEffect(()=>{
+        readCookieUser();
+    })
+    return (
+
+                <div >
+
+                        {/*<MaterialTableDemo/>*/}
+                        <EnhancedTable/>
+
+                </div>
+
     );
 }
 
