@@ -42,13 +42,13 @@
     <property name="ts.external.directory.path" value="C:\Users\admin\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\193.5233.80\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Github\Diplomarbeit\errorkb-frontend\src\components\auth" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Github\Diplomarbeit\errorkb-frontend\src" />
       <recent name="D:\Github\Diplomarbeit\errorkb-frontend\_DELETED" />
       <recent name="D:\Github\Diplomarbeit\errorkb-frontend" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Github\Diplomarbeit\errorkb-frontend\src\components\auth" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
@@ -110,6 +110,8 @@
       <workItem from="1581609638588" duration="5846000" />
       <workItem from="1583943891618" duration="3803000" />
       <workItem from="1584465407589" duration="6978000" />
+      <workItem from="1584880673593" duration="5420000" />
+      <workItem from="1584981704820" duration="8793000" />
     </task>
     <servers />
   </component>
@@ -145,9 +147,9 @@
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
     <state x="1416" y="303" width="607" height="804" key="find.popup/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1583944874076" />
-    <state x="1383" y="317" key="search.everywhere.popup" timestamp="1580473289016">
+    <state x="1383" y="317" width="672" height="678" key="search.everywhere.popup" timestamp="1584990728767">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
-    <state x="1383" y="317" key="search.everywhere.popup/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1580473289016" />
+    <state x="1383" y="317" width="672" height="678" key="search.everywhere.popup/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1584990728767" />
   </component>
 </project>

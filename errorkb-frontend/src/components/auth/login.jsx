@@ -22,13 +22,13 @@ export default function Login() {
     const Auth = React.useContext(AuthApi);
 
     const handleOnClick=async()=>{
-        const url = "http://localhost/errorkb/api/user/"+username;
+        const url = "http://localhost/errorkb/api/user?username="+username;
         const response = await fetch(url);
         const data = await response.json();
-        if (data[0].username == username && data[0].passwd == password){
+        if (data.username == username && data.passwd == password){
             Auth.setAuth(true);
-            setCookie("user",data[0].username);
-            setCookie("rights",data[0].privileges);
+            setCookie("user",data.username);
+            setCookie("rights",data.privileges);
         }
         else{
             alert("Wrong credentials")

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ErrorKBEntryModelStoreContainer" CdmEntityContainer="errorkbEntryEntities">
+    <EntitySetMapping Name="entries">
+      <EntityTypeMapping TypeName="ErrorKBEntryModel.entry">
+        <MappingFragment StoreEntitySet="entries">
+          <ScalarProperty Name="e_id" ColumnName="e_id" />
+          <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="user" ColumnName="user" />
+          <ScalarProperty Name="solution" ColumnName="solution" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
