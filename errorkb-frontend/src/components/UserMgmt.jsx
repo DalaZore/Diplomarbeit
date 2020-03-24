@@ -50,7 +50,7 @@ export default function UserMgmt() {
     const [state, setState] = React.useState({
         columns: [
             { title: 'Username', field: 'username' },
-            { title: 'Password', field: 'password' },
+            { title: 'Password', field: 'password'},
             { title: 'Privileges', field: 'priv' },
         ],
         data: [
