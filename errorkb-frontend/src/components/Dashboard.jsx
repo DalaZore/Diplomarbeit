@@ -60,6 +60,8 @@ export default function Dashboard() {
         columns: [
             { title: 'ID', field: 'id' ,editable:'never'},
             { title: 'Status', field: 'status',lookup:{open:'open',closed:'closed'} },
+            { title: 'Category', field: 'category',lookup:{product:'product',process:'process'} },
+            { title: 'Category Description', field: 'catdesc' },
             { title: 'Title', field: 'title' },
             { title: 'Description', field: 'desc' },
             { title: 'Assigned user', field: 'user' },
@@ -81,7 +83,7 @@ export default function Dashboard() {
                 {resolve();
                     setState(prevState => {
                         const data = [...prevState.data];
-                        data.push({id:entrydata[i].id,status:entrydata[i].status,title:entrydata[i].title,desc:entrydata[i].description.slice(0,50),user:entrydata[i].user,date:entrydata[i].timestamp,solution:entrydata[i].solution});
+                        data.push({id:entrydata[i].id,status:entrydata[i].status,category:entrydata[i].category,catdesc:entrydata[i].catdesc,title:entrydata[i].title,desc:entrydata[i].description.slice(0,50),user:entrydata[i].user,date:entrydata[i].timestamp,solution:entrydata[i].solution});
                         return { ...prevState, data };
                     });
                 }
@@ -91,13 +93,30 @@ export default function Dashboard() {
     useEffect(()=>{
         getEntries();
     },[]);
-
         return(
             <MaterialTable
                 title="Entries"
                 columns={state.columns}
                 data={state.data}
                 icons={tableIcons}
+                detailPanel={[
+                    {
+                        tooltip: 'Show full description',
+                        render: rowData => {
+                            return (
+                                <div
+                                    style={{
+                                        fontSize: 15,
+                                        display:'block',
+                                        textAlign:'center',
+                                    }}
+                                >
+                                   {'Description: '}
+                                   {rowData.desc}
+                                </div>
+                            )
+                        },
+                    }]}
                 editable={{
                     onRowAdd: newData =>
                         new Promise(resolve => {
@@ -110,9 +129,15 @@ export default function Dashboard() {
                                     if(newData.status != "open" && newData.status != "closed") {
                                         newData.status = "open"
                                     }
-                                    if(newData.status == "open" && newData.solution!= null){
-                                        newData.solution = null;
+                                    if(newData.solution == null){
+                                        newData.solution = "";
+                                    }
+                                    if(newData.status == "open" && newData.solution != ""){
+                                        newData.solution = "";
                                         alert("Warning: You can only provide a solution to a closed entry. The solution gets deleted. The entry is added.");
+                                    }
+                                    if(newData.solution == null){
+                                        newData.solution = "";
                                     }
                                     if(newData.timestamp != null){
                                         alert("Timestamp not valid");
@@ -134,10 +159,18 @@ export default function Dashboard() {
                                         alert("Error: Invalid ID");
                                         return { ...prevState, data };
                                     }
-                                    const url = "http://localhost/errorkb/api/PostNewEntry/?tit="+newData.title+"&desc="+newData.desc+"&stat="+newData.status+"&username="+newData.user+"&solution="+newData.solution;
+                                    if(newData.category != "product" && newData.category != "process"){
+                                        alert("Please assign this entry a category");
+                                        return { ...prevState, data };
+                                    }
+                                    if(newData.catdesc == null){
+                                            alert("Please enter a Category Description (e.g. Office 2016)");
+                                            return { ...prevState, data };
+                                    }
+                                    const url = "http://localhost/errorkb/api/PostNewEntry/?tit="+newData.title+"&desc="+newData.desc+"&stat="+newData.status+"&username="+newData.user+"&solution="+newData.solution+"&category="+newData.category+"&catdesc="+newData.catdesc;
 
                                         const response = await request('POST',url);
-                                        if(response.statusCode==200){
+                                        if(response.status==200){
                                             data.push(newData);
                                             return { ...prevState, data };
                                         }
@@ -167,8 +200,11 @@ export default function Dashboard() {
                                                 if(newData.status != "open" && newData.status != "closed") {
                                                     newData.status = "open"
                                                 }
-                                                if(newData.status == "open" && newData.solution!= null){
-                                                    newData.solution = null;
+                                                if(newData.solution==null){
+                                                    newData.solution = "";
+                                                }
+                                                if(newData.status == "open" && newData.solution != ""){
+                                                    newData.solution = "";
                                                     alert("Warning: You can only provide a solution to a closed entry. The solution gets deleted. The entry is added.");
                                                 }
                                                 if(newData.timestamp != null){
@@ -191,10 +227,18 @@ export default function Dashboard() {
                                                     alert("Error: Invalid ID");
                                                     return { ...prevState, data };
                                                 }
-                                            const url = "http://localhost/errorkb/api/PutNewEntry/?id="+ oldData.id+"&tit="+newData.title+"&desc="+newData.desc+"&stat="+newData.status+"&username="+newData.user+"&solution="+newData.solution;
+                                                if(newData.category != "product" && newData.category != "process"){
+                                                    alert("Please assign this entry a category");
+                                                    return { ...prevState, data };
+                                                }
+                                                if(newData.catdesc == null){
+                                                    alert("Please enter a Category Description (e.g. Office 2016)");
+                                                    return { ...prevState, data };
+                                                }
+                                            const url = "http://localhost/errorkb/api/PutNewEntry/?id="+ oldData.id+"&tit="+newData.title+"&desc="+newData.desc+"&stat="+newData.status+"&username="+newData.user+"&solution="+newData.solution+"&category="+newData.category+"&catdesc="+newData.catdesc;
 
                                                 const response = await request('PUT',url);
-                                                if(response.statusCode==200){
+                                                if(response.status==200){
                                                     data[data.indexOf(oldData)] = newData;
                                                     return { ...prevState, data };
                                                 }
@@ -220,7 +264,7 @@ export default function Dashboard() {
                                     try{
                                         if(cookies.rights == "admin"){
                                             const response = await request('DELETE',url);
-                                            if(response.statusCode==200){
+                                            if(response.status==200){
                                                 data.splice(data.indexOf(oldData), 1);
                                                 return { ...prevState, data };
                                             }
@@ -250,7 +294,3 @@ export default function Dashboard() {
 
 }
 
-
-const style = {
-    margin: 15,
-};

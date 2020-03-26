@@ -11,6 +11,8 @@
     <Property Name="status" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="user" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="solution" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="category" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="catdesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityContainer Name="errorkbEntryEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="entries" EntityType="Self.entry" />

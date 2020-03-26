@@ -11,6 +11,8 @@
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="user" ColumnName="user" />
           <ScalarProperty Name="solution" ColumnName="solution" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="catdesc" ColumnName="catdesc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

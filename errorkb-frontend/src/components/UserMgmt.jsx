@@ -51,7 +51,7 @@ export default function UserMgmt() {
         columns: [
             { title: 'Username', field: 'username' },
             { title: 'Password', field: 'password'},
-            { title: 'Privileges', field: 'priv' },
+            { title: 'Privileges', field: 'priv', lookup:{admin:'admin',user:'user'} },
         ],
         data: [
 
@@ -60,7 +60,7 @@ export default function UserMgmt() {
 
     const getUsers = async() => {
 
-        const url = "http://localhost/errorkb/api/user";
+        const url = "http://localhost/errorkb/api/GetAllUsers";
         const response = await fetch(url);
         const userdata = await response.json();
         for(let i = 0 ; i < userdata.length; i++){
@@ -68,13 +68,12 @@ export default function UserMgmt() {
                 {resolve();
                     setState(prevState => {
                         const data = [...prevState.data];
-                        data.push({username:userdata[i].username,password:userdata[i].passwd,priv:userdata[i].privileges});
+                        data.push({username:userdata[i].username,password:"********",priv:userdata[i].privileges});
                         return { ...prevState, data };
                     });
                 }
             })
         }
-        console.log("test")
     }
 
 
@@ -115,8 +114,17 @@ export default function UserMgmt() {
                             resolve();
                             setState(async prevState => {
                                 const data = [...prevState.data];
-                                const url = "http://localhost/errorkb/api/PostNewUser/?username="+newData.username+"&password="+newData.password+"&priv="+newData.priv;
+
                                 try{
+                                    if(newData.password == null){
+                                        alert("Please assign a password")
+                                        return { ...prevState, data };
+                                    }
+                                    if(newData.username == null){
+                                        alert("Please assign a username")
+                                        return { ...prevState, data };
+                                    }
+                                    const url = "http://localhost/errorkb/api/PostNewUser/?username="+newData.username+"&password="+newData.password+"&priv="+newData.priv;
                                     const response = await request('POST',url);
                                     if(response.statusCode==200){
                                         data.push(newData);
@@ -143,12 +151,35 @@ export default function UserMgmt() {
                                         console.log(newData);
                                         setState(async prevState => {
                                             const data = [...prevState.data];
-                                            const url = "http://localhost/errorkb/api/PutNewUser/?oldUsername="+ oldData.username+"&oldPassword="+oldData.password+"&newUsername="+newData.username+"&newPassword="+newData.password+"&newPriv="+newData.priv;
+
                                             try{
-                                                const response = await request('PUT',url);
-                                                if(response.statusCode==200){
-                                                    data[data.indexOf(oldData)] = newData;
+                                                if(newData.password == null){
+                                                    alert("Please assign a password")
                                                     return { ...prevState, data };
+                                                }
+                                                if(newData.username == null){
+                                                    alert("Please assign a username")
+                                                    return { ...prevState, data };
+                                                }
+                                                if(newData.priv != "admin" && newData.priv != "user"){
+                                                    alert("Please assign valid privileges")
+                                                    return { ...prevState, data };
+                                                }
+                                                if(newData.password == oldData.password){
+                                                    const url = "http://localhost/errorkb/api/PutNewUser/?oldUsername="+ oldData.username+"&newUsername="+newData.username+"&newPriv="+newData.priv;
+                                                    const response = await request('PUT',url);
+                                                    if(response.statusCode==200){
+                                                        data[data.indexOf(oldData)] = newData;
+                                                        return { ...prevState, data };
+                                                    }
+                                                }
+                                                if(newData.password != oldData.password){
+                                                    const url = "http://localhost/errorkb/api/PutNewUser/?oldUsername="+ oldData.username+"&newUsername="+newData.username+"&newPassword="+newData.password+"&newPriv="+newData.priv;
+                                                    const response = await request('PUT',url);
+                                                    if(response.statusCode==200){
+                                                        data[data.indexOf(oldData)] = newData;
+                                                        return { ...prevState, data };
+                                                    }
                                                 }
                                             }
                                             catch(error){
@@ -191,8 +222,4 @@ export default function UserMgmt() {
     );
 }
 
-
-const style = {
-    margin: 15,
-};
 

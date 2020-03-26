@@ -21,5 +21,7 @@ namespace ErrorkbDataAccess
         public string status { get; set; }
         public string user { get; set; }
         public string solution { get; set; }
+        public string category { get; set; }
+        public string catdesc { get; set; }
     }
 }

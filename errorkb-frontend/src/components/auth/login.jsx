@@ -18,98 +18,118 @@ const useStyles = makeStyles(theme => ({
 export default function Login() {
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
     const [username, setUsername] = useState('');
-    const [password,setPassword]= useState('');
+    const [password, setPassword] = useState('');
     const Auth = React.useContext(AuthApi);
 
-    const handleOnClick=async()=>{
-        const url = "http://localhost/errorkb/api/user?username="+username;
+
+    const handleOnClick = async () => {
+        if(password==null){
+            setPassword("");
+        }
+        if(username==null){
+            setUsername("");
+        }
+        const url = "http://localhost/errorkb/api/GetUser/?username=" + username+"&password="+password;
         const response = await fetch(url);
-        const data = await response.json();
-        if (data.username == username && data.passwd == password){
-            Auth.setAuth(true);
-            setCookie("user",data.username);
-            setCookie("rights",data.privileges);
+        console.log(url);
+        try{
+            const data = await response.json();
+            if(response.status==200){
+                Auth.setAuth(true);
+                setCookie("user", data[0].username);
+                setCookie("rights", data[0].privileges);
+            }
         }
-        else{
-            alert("Wrong credentials")
+        catch{
+            alert("wrong credentials");
         }
+        finally{
+
+        }
+
+        console.log(response);
+
+
     }
 
 
-    const classes = useStyles();
 
-    return (
 
-        <form className={classes.root} noValidate autoComplete="off">
+        const classes = useStyles();
 
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop:'100px',
-            }}>
-                <Grid container spacing={4}>
-                    <Grid item xs={5} sm={5}/>
-                    <Grid item xs={9} sm={5}>
-                        <TextField
-                            id="standard-username-input"
-                            label="Username"
-                            type="text"
-                            autoComplete="current-username"
-                            value={username}
-                            onChange={
-                                (e) => {
-                                setUsername(e.target.value);
-                            }}
-                        />
+        return (
+
+            <form className={classes.root} noValidate autoComplete="off">
+
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '100px',
+                }}>
+                    <Grid container spacing={4}>
+                        <Grid item xs={5} sm={5}/>
+                        <Grid item xs={9} sm={5}>
+                            <TextField
+                                id="standard-username-input"
+                                label="Username"
+                                type="text"
+                                autoComplete="current-username"
+                                value={username}
+                                onChange={
+                                    (e) => {
+                                        setUsername(e.target.value);
+                                    }}
+                            />
+                        </Grid>
+
+                    </Grid>
+                </div>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <Grid container spacing={4}>
+                        <Grid item xs={5} sm={5}/>
+                        <Grid item xs={9} sm={5}>
+                            <TextField
+                                id="standard-password-input"
+                                label="Password"
+                                type="password"
+                                autoComplete="current-password"
+                                value={password}
+                                onChange={
+                                    (e) => {
+                                        setPassword(e.target.value)
+                                    }}
+                            />
+                            <Grid item xs={5}/>
+                        </Grid>
                     </Grid>
 
-                </Grid>
-            </div>
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                <Grid container spacing={4}>
-                    <Grid item xs={5} sm={5}/>
-                    <Grid item xs={9} sm={5}>
-                    <TextField
-                        id="standard-password-input"
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={
-                            (e) => {
-                            setPassword(e.target.value)
-                        }}
-                    />
-                    <Grid item xs={5}/>
-                 </Grid>
-                </Grid>
+                </div>
 
-            </div>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingTop: '10px',
+                    paddingLeft: '10px',
+                }}>
+                    <Grid container spacing={4}>
+                        <Grid item xs={5} sm={5}/>
 
-            <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                paddingTop:'10px',
-                paddingLeft:'10px',
-            }}>
-                <Grid container spacing={4}>
-                    <Grid item xs={5} sm={5}/>
+                        <Grid item xs={8} sm={6}>
+                            <Button onClick={handleOnClick} className={classes.root} style={{width: '255px'}}
+                                    variant="outlined" color="Primary">
+                                Login
+                            </Button>
+                            <Grid item xs={5}/>
+                        </Grid>
+                    </Grid>
 
-                    <Grid item xs={8} sm={6}>
-                    <Button onClick={handleOnClick} className={classes.root} style={{width:'255px'}} variant="outlined" color="Primary">
-                        Login
-                    </Button>
-                    <Grid item xs={5}/>
-                </Grid>
-                </Grid>
-
-            </div>
-        </form>
-    );
-}
+                </div>
+            </form>
+        );
+    }

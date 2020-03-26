@@ -174,8 +174,9 @@ export default function PersistentDrawerLeft() {
         }
     }
     useEffect(()=>{
-        readCookieUser();
         readCookieRights();
+        readCookieUser();
+
     })
     return (
 
@@ -203,24 +204,6 @@ export default function PersistentDrawerLeft() {
                     <Typography variant="h6" noWrap>
                         Error-KB
                     </Typography>
-                    {
-                        isLoggedIn
-                        ?   <div className={classes.search}>
-                                <div className={classes.searchIcon}>
-                                    <SearchIcon />
-                                </div>
-                                <InputBase
-                                    placeholder="Search…"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                    }}
-                                    inputProps={{ 'aria-label': 'search' }}
-                                />
-                            </div>
-                        :<div></div>
-                    }
-
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -247,18 +230,7 @@ export default function PersistentDrawerLeft() {
                      <ListItem button key={"User management"} onClick={handleOnClickUserMgmt} >
                                 <ListItemIcon>{<AccountBoxIcon />}</ListItemIcon>
                                 <ListItemText primary={'User management'} />
-                     </ListItem>:null}
-                <Divider />
-
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-
-                    ))}
-
-                <Divider />
+                     </ListItem>:<div></div>}
                 <List>
                         <ListItem button key={"Logout"} onClick={handleOnClickLogout}>
                             <ListItemIcon>{<MailIcon />}</ListItemIcon>

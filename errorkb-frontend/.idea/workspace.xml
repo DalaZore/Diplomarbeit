@@ -113,6 +113,9 @@
       <workItem from="1584880673593" duration="5420000" />
       <workItem from="1584981704820" duration="8793000" />
       <workItem from="1585066544748" duration="7087000" />
+      <workItem from="1585169096307" duration="2883000" />
+      <workItem from="1585245095784" duration="7647000" />
+      <workItem from="1585252891173" duration="584000" />
     </task>
     <servers />
   </component>
@@ -124,26 +127,14 @@
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
     <state x="1450" y="451" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1580475418374" />
-    <state width="3419" height="404" key="GridCell.Tab.0.bottom" timestamp="1576483833069">
-      <screen x="0" y="0" width="3440" height="1410" />
-    </state>
-    <state width="3419" height="404" key="GridCell.Tab.0.bottom/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1576483833069" />
-    <state width="3419" height="404" key="GridCell.Tab.0.center" timestamp="1576483833069">
-      <screen x="0" y="0" width="3440" height="1410" />
-    </state>
-    <state width="3419" height="404" key="GridCell.Tab.0.center/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1576483833069" />
-    <state width="3419" height="404" key="GridCell.Tab.0.left" timestamp="1576483833069">
-      <screen x="0" y="0" width="3440" height="1410" />
-    </state>
-    <state width="3419" height="404" key="GridCell.Tab.0.left/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1576483833069" />
-    <state width="3419" height="404" key="GridCell.Tab.0.right" timestamp="1576483833069">
-      <screen x="0" y="0" width="3440" height="1410" />
-    </state>
-    <state width="3419" height="404" key="GridCell.Tab.0.right/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1576483833069" />
     <state x="1221" y="346" key="SettingsEditor" timestamp="1579193493530">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>
     <state x="1221" y="346" key="SettingsEditor/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1579193493530" />
+    <state x="1529" y="621" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585246056504">
+      <screen x="0" y="0" width="3440" height="1410" />
+    </state>
+    <state x="1529" y="621" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1410/-2560.0.2560.1410@0.0.3440.1410" timestamp="1585246056504" />
     <state x="1416" y="303" width="607" height="804" key="find.popup" timestamp="1583944874076">
       <screen x="0" y="0" width="3440" height="1410" />
     </state>

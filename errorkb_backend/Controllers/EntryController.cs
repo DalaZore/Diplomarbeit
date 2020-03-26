@@ -16,7 +16,7 @@ namespace Errorkb_backend.Controllers
     {
         [System.Web.Http.Route("Api/PutNewEntry")]
         [System.Web.Http.HttpPut]
-        public IHttpActionResult PutNewEntry(int id,string tit, string desc, string stat, string username,string solution)
+        public IHttpActionResult PutNewEntry(int id,string tit, string desc, string stat, string username,string solution, string category, string catdesc)
         {
             using (errorkbEntryEntities entities = new errorkbEntryEntities())
             {
@@ -30,8 +30,10 @@ namespace Errorkb_backend.Controllers
                         existingEntry.status = stat;
                         existingEntry.user = username;
                         existingEntry.solution = solution;
-                        
-                        entities.SaveChanges();
+                        existingEntry.category = category;
+                        existingEntry.catdesc = catdesc;
+
+                    entities.SaveChanges();
                     }
                     else
                     {
@@ -44,23 +46,30 @@ namespace Errorkb_backend.Controllers
         
         [System.Web.Http.Route("Api/PostNewEntry")]
         [System.Web.Http.HttpPost]
-        public IHttpActionResult PostNewEntry(string tit, string desc, string stat, string username,string solution)
+        public IHttpActionResult PostNewEntry(string tit, string desc, string stat, string username,string solution,string category,string catdesc)
         {
             using (errorkbEntryEntities entities = new errorkbEntryEntities())
             {
                 if (stat == "open" || stat == "closed")
                 {
-                    entities.entries.Add(new entry()
+                    if (category == "product" || category == "process")
                     {
-                        title = tit,
-                        description = desc,
-                        status = stat,
-                        user = username,
-                        solution = solution
-                    });
-                    entities.SaveChanges();
+                        entities.entries.Add(new entry()
+                        {
+                            title = tit,
+                            description = desc,
+                            status = stat,
+                            user = username,
+                            solution = solution,
+                            category = category,
+                            catdesc = catdesc
+                            
+                        });
+                        entities.SaveChanges();
 
-                    return Ok();
+                        return Ok();
+                    }
+                    return Content(HttpStatusCode.BadRequest, "Any object");
                 }
                 else
                 {
@@ -85,7 +94,9 @@ namespace Errorkb_backend.Controllers
                         description = e.description,
                         status = e.status,
                         user = e.user,
-                        solution = e.solution
+                        solution = e.solution,
+                        category = e.category,
+                        catdesc = e.catdesc
                     }
                 ).ToList<EntryViewModel>();
             }

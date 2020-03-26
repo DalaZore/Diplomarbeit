@@ -11,6 +11,8 @@
     <Property Name="status" Type="enum" Nullable="false" />
     <Property Name="user" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="solution" Type="varchar" MaxLength="255" />
+    <Property Name="category" Type="enum" Nullable="false" />
+    <Property Name="catdesc" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityContainer Name="ErrorKBEntryModelStoreContainer">
     <EntitySet Name="entries" EntityType="Self.entries" Schema="errorkb" store:Type="Tables" />

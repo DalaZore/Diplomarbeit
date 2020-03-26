@@ -20,6 +20,7 @@
     <setting file="file://$PROJECT_DIR$/Models/EntryViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ErrorkbDataAccess/ErrorkbEntrieModel.Context.tt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Web.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ErrorkbDataAccess/ErrorkbEntrieModel.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/App_Start/WebApiConfig.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -28,6 +29,7 @@
         <option value="$PROJECT_DIR$/Controllers/UserController.cs" />
         <option value="$PROJECT_DIR$/Models/EntryViewModel.cs" />
         <option value="$PROJECT_DIR$/Web.config" />
+        <option value="$PROJECT_DIR$/ErrorkbDataAccess/ErrorkbEntrieModel.edmx" />
         <option value="$PROJECT_DIR$/Controllers/EntryController.cs" />
       </list>
     </option>
@@ -86,6 +88,7 @@
       <updated>1584988562163</updated>
       <workItem from="1584988566089" duration="1763000" />
       <workItem from="1585067791508" duration="4512000" />
+      <workItem from="1585169109208" duration="528000" />
     </task>
     <servers />
   </component>
