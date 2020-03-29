@@ -16,6 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `entries`
+--
+
+DROP TABLE IF EXISTS `entries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `entries` (
+  `e_id` int NOT NULL AUTO_INCREMENT,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` varchar(45) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `status` enum('open','closed') NOT NULL,
+  `user` varchar(45) NOT NULL,
+  `solution` varchar(255) DEFAULT NULL,
+  `category` enum('product','process') NOT NULL,
+  `catdesc` varchar(255) NOT NULL,
+  PRIMARY KEY (`e_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entries`
+--
+
+LOCK TABLES `entries` WRITE;
+/*!40000 ALTER TABLE `entries` DISABLE KEYS */;
+INSERT INTO `entries` VALUES (1,'2020-03-25 21:18:37','Demo closed','Demo closed','closed','kbuser','reason for closing','product','Office 2019'),(2,'2020-03-26 20:01:04','Demo','Demo open','open','kbuser',NULL,'product','Office 2019');
+/*!40000 ALTER TABLE `entries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -29,7 +60,7 @@ CREATE TABLE `users` (
   `privileges` enum('user','admin') NOT NULL DEFAULT 'user',
   PRIMARY KEY (`u_id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +69,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'kbadmin','kbadmin','admin');
+INSERT INTO `users` VALUES (1,'kbadmin','LCmNShNnpOpYuUnzuTZzZA==','admin'),(7,'kbuser','jpyuf4vCXAi9Vke4D6Ki9Q==','user');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +82,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-02-11 18:55:27
+-- Dump completed on 2020-03-29 13:52:45
