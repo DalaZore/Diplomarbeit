@@ -56,6 +56,7 @@ var request = require('superagent');
 export default function Dashboard() {
 
     const [cookies, setCookie, removeCookie] = useCookies(['rights']);
+    const pathStart = window.location.protocol + "//" + window.location.host;
     const [state, setState] = React.useState({
         columns: [
             { title: 'ID', field: 'id' ,editable:'never'},
@@ -75,7 +76,7 @@ export default function Dashboard() {
 
     const getEntries = async() => {
 
-        const url = "http://localhost/errorkb/api/GetAllEntries";
+        const url = pathStart + ":8080/errorkb/api/GetAllEntries";
         const response = await fetch(url);
         const entrydata = await response.json();
         for(let i = 0 ; i < entrydata.length; i++){
@@ -92,8 +93,10 @@ export default function Dashboard() {
     }
     useEffect(()=>{
         getEntries();
+
     },[]);
         return(
+
             <MaterialTable
                 title="Entries"
                 columns={state.columns}
@@ -167,7 +170,7 @@ export default function Dashboard() {
                                             alert("Please enter a Category Description (e.g. Office 2016)");
                                             return { ...prevState, data };
                                     }
-                                    const url = "http://localhost/errorkb/api/PostNewEntry/?tit="+newData.title+"&desc="+newData.desc+"&stat="+newData.status+"&username="+newData.user+"&solution="+newData.solution+"&category="+newData.category+"&catdesc="+newData.catdesc;
+                                    const url = pathStart + ":8080/errorkb/api/PostNewEntry/?tit="+newData.title+"&desc="+newData.desc+"&stat="+newData.status+"&username="+newData.user+"&solution="+newData.solution+"&category="+newData.category+"&catdesc="+newData.catdesc;
 
                                         const response = await request('POST',url);
                                         if(response.status==200){
@@ -235,7 +238,7 @@ export default function Dashboard() {
                                                     alert("Please enter a Category Description (e.g. Office 2016)");
                                                     return { ...prevState, data };
                                                 }
-                                            const url = "http://localhost/errorkb/api/PutNewEntry/?id="+ oldData.id+"&tit="+newData.title+"&desc="+newData.desc+"&stat="+newData.status+"&username="+newData.user+"&solution="+newData.solution+"&category="+newData.category+"&catdesc="+newData.catdesc;
+                                            const url = pathStart + ":8080/errorkb/api/PutNewEntry/?id="+ oldData.id+"&tit="+newData.title+"&desc="+newData.desc+"&stat="+newData.status+"&username="+newData.user+"&solution="+newData.solution+"&category="+newData.category+"&catdesc="+newData.catdesc;
 
                                                 const response = await request('PUT',url);
                                                 if(response.status==200){
@@ -260,7 +263,7 @@ export default function Dashboard() {
                                 resolve();
                                 setState(async prevState => {
                                     const data = [...prevState.data];
-                                    const url = "http://localhost/errorkb/Api/DeleteEntry?id="+oldData.id;
+                                    const url = pathStart + ":8080/errorkb/Api/DeleteEntry?id="+oldData.id;
                                     try{
                                         if(cookies.rights == "admin"){
                                             const response = await request('DELETE',url);

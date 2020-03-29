@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Login() {
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const pathStart = window.location.protocol + "//" + window.location.host;
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const Auth = React.useContext(AuthApi);
@@ -29,7 +30,7 @@ export default function Login() {
         if(username==null){
             setUsername("");
         }
-        const url = "http://localhost/errorkb/api/GetUser/?username=" + username+"&password="+password;
+        const url = pathStart + ":8080/errorkb/api/GetUser/?username=" + username+"&password="+password;
         const response = await fetch(url);
         console.log(url);
         try{

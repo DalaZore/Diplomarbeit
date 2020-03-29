@@ -44,6 +44,7 @@ const tableIcons = {
 export default function UserMgmt() {
     var request = require('superagent');
     const [cookies, setCookie, removeCookie] = useCookies(['user']);
+    const pathStart = window.location.protocol + "//" + window.location.host;
     const [isAdm,setAdm] = React.useState(false);
     const [isLoggedIn,setLoggedIn] = React.useState(false);
 
@@ -60,7 +61,7 @@ export default function UserMgmt() {
 
     const getUsers = async() => {
 
-        const url = "http://localhost/errorkb/api/GetAllUsers";
+        const url = pathStart + ":8080/errorkb/api/GetAllUsers";
         const response = await fetch(url);
         const userdata = await response.json();
         for(let i = 0 ; i < userdata.length; i++){
@@ -124,7 +125,7 @@ export default function UserMgmt() {
                                         alert("Please assign a username")
                                         return { ...prevState, data };
                                     }
-                                    const url = "http://localhost/errorkb/api/PostNewUser/?username="+newData.username+"&password="+newData.password+"&priv="+newData.priv;
+                                    const url = pathStart + ":8080/errorkb/api/PostNewUser/?username="+newData.username+"&password="+newData.password+"&priv="+newData.priv;
                                     const response = await request('POST',url);
                                     if(response.statusCode==200){
                                         data.push(newData);
@@ -166,7 +167,7 @@ export default function UserMgmt() {
                                                     return { ...prevState, data };
                                                 }
                                                 if(newData.password == oldData.password){
-                                                    const url = "http://localhost/errorkb/api/PutNewUser/?oldUsername="+ oldData.username+"&newUsername="+newData.username+"&newPriv="+newData.priv;
+                                                    const url = pathStart + ":8080/errorkb/api/PutNewUser/?oldUsername="+ oldData.username+"&newUsername="+newData.username+"&newPriv="+newData.priv;
                                                     const response = await request('PUT',url);
                                                     if(response.statusCode==200){
                                                         data[data.indexOf(oldData)] = newData;
@@ -174,7 +175,7 @@ export default function UserMgmt() {
                                                     }
                                                 }
                                                 if(newData.password != oldData.password){
-                                                    const url = "http://localhost/errorkb/api/PutNewUser/?oldUsername="+ oldData.username+"&newUsername="+newData.username+"&newPassword="+newData.password+"&newPriv="+newData.priv;
+                                                    const url = pathStart + ":8080/errorkb/api/PutNewUser/?oldUsername="+ oldData.username+"&newUsername="+newData.username+"&newPassword="+newData.password+"&newPriv="+newData.priv;
                                                     const response = await request('PUT',url);
                                                     if(response.statusCode==200){
                                                         data[data.indexOf(oldData)] = newData;
@@ -199,7 +200,7 @@ export default function UserMgmt() {
                             resolve();
                             setState(async prevState => {
                                 const data = [...prevState.data];
-                                const url = "http://localhost/errorkb/Api/DeleteUser?username="+oldData.username;
+                                const url = pathStart + ":8080/errorkb/Api/DeleteUser?username="+oldData.username;
                                 try{
                                     const response = await request('DELETE',url);
                                     if(response.statusCode==200){
